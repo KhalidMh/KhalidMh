@@ -1,0 +1,51 @@
+{
+  "_about": "Hand-kept facts for the profile README. Edit this file, push, and the GitHub Action redraws every card. Numbers (contributions, streaks, repos, stars, npm) are fetched by scripts/fetch.py and never typed here.",
+
+  "user": "KhalidMh",
+  "name": "Khalid",
+  "greeting": "// hello, I'm",
+  "tagline": "Node.js developer building on SAP CAP & BTP",
+  "location": "Casablanca, Morocco",
+
+  "links": {
+    "_note": "Leave a url empty to hide its badge.",
+    "linkedin": {"label": "LinkedIn", "url": "https://www.linkedin.com/in/marhoumkhalid/"},
+    "email": {"label": "Email", "address": "khalid.marhoum97@gmail.com"}
+  },
+
+  "hero_code": [
+    "service Profile {",
+    "  entity Khalid {",
+    "    role   : 'Node.js · SAP CAP dev';",
+    "    stack  : many ['CAP','BTP','HANA'];",
+    "    before : 'PHP · Laravel · Vue';",
+    "    speaks : ['en','fr','ar'];",
+    "  }",
+    "}"
+  ],
+
+  "whoami": [
+    {"cmd": "whoami", "out": ["khalid, Node.js / SAP CAP developer, Casablanca"]},
+    {"cmd": "cat ~/.now", "out": [
+      "building internal apps on SAP CAP and SAP BTP",
+      "writing capx, a Laravel-style project installer for SAP CAP"
+    ]},
+    {"cmd": "cat ~/.before", "out": ["PHP, Laravel, Vue.js, Symfony, Magento, multi-tenant SaaS"]},
+    {"cmd": "echo $LANG", "out": ["en, fr, ar"]}
+  ],
+
+  "projects": [
+    {
+      "id": "capx",
+      "name": "capx",
+      "line": "A Laravel-style CLI installer for SAP CAP projects.",
+      "chips": ["Node.js", "SAP CAP", "CLI", "MTA"],
+      "url": "https://github.com/KhalidMh/capx",
+      "repo": "KhalidMh/capx",
+      "npm": "capx",
+      "status_unpublished": "in the works"
+    }
+  ],
+
+  "footer": "Cards redrawn every night by a GitHub Action from public GitHub and npm data."
+}
