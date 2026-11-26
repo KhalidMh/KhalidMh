@@ -1,6 +1,22 @@
 {
+ "contributions": {
+  "OpenKrisp/OpenKrisp": {
+   "description": "noise cancellation desktop app",
+   "language": "Rust",
+   "merged_prs": 0,
+   "stars": 8
+  },
+  "webosbrew/youtube-webos": {
+   "description": "YouTube app for webOS without ads",
+   "language": "JavaScript",
+   "merged_prs": 0,
+   "stars": 1612
+  }
+ },
  "fetched": {
   "calendar": "2026-11-26",
+  "contrib:OpenKrisp/OpenKrisp": "2026-11-26",
+  "contrib:webosbrew/youtube-webos": "2026-11-26",
   "project:capx": "2026-11-26",
   "user": "2026-11-26"
  },
