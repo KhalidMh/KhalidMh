@@ -42,6 +42,7 @@ There is no test suite or linter. To check a change, run `--demo` and open the S
 - A link with an empty `url`/`address` hides its badge. Email badges become `mailto:` links.
 - Each entry in `projects` produces a `project-<id>` card. `npm` and `repo` are optional fetch targets. One project renders at full width, and more than one at 49% each.
 - `window_title` (hero card chrome) and `prompt` (whoami terminal, a space is appended) are optional; `cards.py` has fallbacks.
+- `contributions.repos` lists upstream repos you contribute to. `fetch.py` counts your merged PRs in each (search API), and `build.draw` only includes repos with at least one; with none, the `label-oss`/`contributions` cards and README section are left out entirely.
 - `hero_code` lines are highlighted by the small CDS tokenizer in `cards.highlight`.
 
 ## CI

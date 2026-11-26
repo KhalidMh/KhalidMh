@@ -10,6 +10,7 @@ the saved copy, so the profile never breaks; the red run makes GitHub email you)
 import json
 import random
 import sys
+import urllib.parse
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -86,7 +87,10 @@ def demo_state(profile):
     return {"user": {"created": "2019-03-14", "public_repos": 6, "stars": 23},
             "last_year": {"total": sum(last.values()), "days": last},
             "years": {"2025": {"total": 0, "days": {k: v for k, v in days.items() if k.startswith("2025") and v}}},
-            "projects": {"capx": {"npm_version": "0.3.1", "npm_downloads": 412, "stars": 9}}}
+            "projects": {"capx": {"npm_version": "0.3.1", "npm_downloads": 412, "stars": 9}},
+            "contributions": {c["repo"]: {"stars": 1612 if i == 0 else 8, "language": "JavaScript" if i == 0 else "Rust",
+                                          "description": "an upstream project", "merged_prs": 3 - i * 2}
+                              for i, c in enumerate(profile.get("contributions", {}).get("repos", []))}}
 
 
 def draw(profile, state, out_dir):
@@ -113,6 +117,19 @@ def draw(profile, state, out_dir):
     for p in profile.get("projects", []):
         facts = state.get("projects", {}).get(p["id"], {})
         save(f"project-{p['id']}", lambda t, ph, p=p, f=facts: cards.project(p, f, t, ph))
+    contrib = profile.get("contributions", {})
+    rows = []
+    for c in contrib.get("repos", []):
+        f = state.get("contributions", {}).get(c["repo"], {})
+        if f.get("merged_prs"):
+            rows.append({"repo": c["repo"], "line": c.get("line") or f.get("description", ""),
+                         "stars": f.get("stars", 0), "language": f.get("language"), "merged": f["merged_prs"]})
+    contrib_href = None
+    if rows:
+        save("label-oss", lambda t, ph: cards.label("open source I contribute to", t, ph))
+        save("contributions", lambda t, ph: cards.contributions(contrib.get("line", ""), rows, t, ph))
+        q = " ".join(["is:pr", "is:merged", f"author:{profile['user']}"] + [f"repo:{r['repo']}" for r in rows])
+        contrib_href = "https://github.com/pulls?q=" + urllib.parse.quote(q)
     badges = []
     for kind, link in profile.get("links", {}).items():
         if kind.startswith("_"):
@@ -125,7 +142,7 @@ def draw(profile, state, out_dir):
             svg, alt = cards.badge(kind, link["label"], theme)
             (out_dir / f"badge-{kind}-{theme}.svg").write_text(svg, encoding="utf-8")
         badges.append((kind, link["label"], href))
-    return d, alts, badges
+    return d, alts, badges, contrib_href
 
 
 def main(argv):
@@ -139,8 +156,8 @@ def main(argv):
                 link["url"] = "https://example.com/"
             if "address" in link:
                 link["address"] = "you@example.com"
-        _, alts, badges = draw(profile, demo_state(profile), out / "assets")
-        (out / "README.md").write_text(readme.render(profile, alts, badges), encoding="utf-8")
+        _, alts, badges, contrib_href = draw(profile, demo_state(profile), out / "assets")
+        (out / "README.md").write_text(readme.render(profile, alts, badges, contrib_href), encoding="utf-8")
         print(f"demo written to {out}")
         return 0
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
@@ -152,8 +169,8 @@ def main(argv):
     if not state.get("last_year"):
         print("no contribution data yet (first run failed?), nothing drawn")
         return 1
-    _, alts, badges = draw(profile, state, ROOT / "assets")
-    (ROOT / "README.md").write_text(readme.render(profile, alts, badges), encoding="utf-8")
+    _, alts, badges, contrib_href = draw(profile, state, ROOT / "assets")
+    (ROOT / "README.md").write_text(readme.render(profile, alts, badges, contrib_href), encoding="utf-8")
     STATE.write_text(json.dumps(state, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     stale = [k for k, v in state.get("fetched", {}).items()
              if (date.today() - date.fromisoformat(v)).days > STALE_DAYS]

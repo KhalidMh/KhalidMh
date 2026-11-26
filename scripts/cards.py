@@ -344,6 +344,44 @@ def project(p, facts, theme, phone):
     return s.render(), alt
 
 
+# ------------------------------------------------------------------ open source contributions
+def short(n):
+    return f"{n:,}" if n < 1000 else f"{n / 1000:.1f}".rstrip("0").rstrip(".") + "k"
+
+
+def contributions(line, rows, theme, phone):
+    """rows: [{"repo", "line", "stars", "language", "merged"}], only repos with a merged PR."""
+    width = W(phone)
+    pad, rh, gap = (20, 64, 10) if phone else (28, 66, 12)
+    name_fs, meta_fs, pill_fs = (13, 11, 11) if phone else (15, 12, 12)
+    total = sum(r["merged"] for r in rows)
+    fs, lh = (12, 18) if phone else (13, 20)
+    right = "" if phone else plural(total, "merged PR")  # on phones each row's pill already says it
+    head = wrap(line, fs, width - 2 * pad - (tw(right, fs) + 16 if right else 0))[:2]
+    top = 56 + (len(head) - 1) * lh
+    s = SVG(width, top + len(rows) * (rh + gap) - gap + 22, theme, "")
+    frame(s)
+    if right:
+        s.text(width - pad, 36, right, fs, 700, "teal", anchor="end")
+    for i, h in enumerate(head):
+        s.text(pad, 36 + i * lh, h, fs, 700, "text")
+    for i, r in enumerate(rows):
+        x, y, w = pad, top + i * (rh + gap), width - 2 * pad
+        s.rect(x, y, w, rh, "code", rx=12, stroke="line")
+        pill = plural(r["merged"], "PR") + " merged"
+        pw = tw(pill, pill_fs) + 20
+        owner, _, name = r["repo"].partition("/")
+        s.spans(x + 16, y + 27, [(fit(owner + "/", name_fs, w - pw - 40 - tw(name, name_fs)), "muted"), (name, "text")],
+                name_fs, 800)
+        _pill(s, x + w - 14 - pw, y + 11, pill, "teal", pill_fs)
+        meta = " · ".join(t for t in (f"{short(r['stars'])} {'star' if r['stars'] == 1 else 'stars'}",
+                                       r["language"], r["line"]) if t)
+        s.text(x + 16, y + 50, fit(meta, meta_fs, w - 32), meta_fs, 400, "muted")
+    alt = (f"Open source, {line}: " + "; ".join(f"{plural(r['merged'], 'merged PR')} to {r['repo']}" for r in rows) + ".")
+    s.label = alt
+    return s.render(), alt
+
+
 def _icon(s, x, y, size):
     s.rect(x, y, size, size, "code", rx=size * 0.24, stroke="line")
     fs = size * 0.36

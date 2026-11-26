@@ -49,5 +49,14 @@
     }
   ],
 
+  "contributions": {
+    "_note": "Upstream repos you send fixes to. A repo shows on the profile only once you have a merged PR there (counted nightly). Optional per-repo \"line\" overrides the upstream description.",
+    "line": "fixing bugs users reported that upstream hadn't fixed yet",
+    "repos": [
+      {"repo": "webosbrew/youtube-webos"},
+      {"repo": "OpenKrisp/OpenKrisp"}
+    ]
+  },
+
   "footer": "Cards redrawn every night by a GitHub Action from public GitHub and npm data."
 }

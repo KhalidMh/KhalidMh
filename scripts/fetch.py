@@ -3,12 +3,14 @@
 Contribution calendar: the public page github.com/users/<user>/contributions (the same numbers your profile
 shows), with the GraphQL API as a fallback when GITHUB_TOKEN is set. Repos and stars: the REST API.
 Projects: npm registry (version, monthly downloads) and the repo's stars.
+Contributions: each upstream repo's stars/language/description and your merged PR count (search API).
 Each source that fails keeps its last good value from state.json; build.py reports it.
 """
 import json
 import os
 import re
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import date, timedelta
 from html import unescape
@@ -160,6 +162,19 @@ def fetch_project(p):
     return out
 
 
+def fetch_contribution(user, repo):
+    r = http(f"https://api.github.com/repos/{repo}")
+    if r is None:
+        raise SourceError(f"repo {repo} not found")
+    meta = json.loads(r)
+    q = urllib.parse.quote(f"repo:{repo} author:{user} type:pr is:merged")
+    found = http(f"https://api.github.com/search/issues?q={q}&per_page=1")
+    if found is None:
+        raise SourceError(f"PR search for {repo} not found")
+    return {"stars": meta.get("stargazers_count", 0), "language": meta.get("language"),
+            "description": meta.get("description") or "", "merged_prs": json.loads(found).get("total_count", 0)}
+
+
 def collect(profile, state, today):
     """Updates state in place. Returns the list of sources that failed this run."""
     failed = []
@@ -181,4 +196,10 @@ def collect(profile, state, today):
             state.setdefault("fetched", {})[f"project:{p['id']}"] = today.isoformat()
         except SourceError as e:
             failed.append(f"project {p['id']}: {e}")
+    for c in profile.get("contributions", {}).get("repos", []):
+        try:
+            state.setdefault("contributions", {})[c["repo"]] = fetch_contribution(user, c["repo"])
+            state.setdefault("fetched", {})[f"contrib:{c['repo']}"] = today.isoformat()
+        except SourceError as e:
+            failed.append(f"contribution {c['repo']}: {e}")
     return failed

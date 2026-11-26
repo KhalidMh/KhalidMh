@@ -17,7 +17,7 @@ def link(href, inner):
     return f'<a href="{escape(href)}">{inner}</a>'
 
 
-def render(profile, alts, badges):
+def render(profile, alts, badges, contrib_href=None):
     user = profile["user"]
     out = [pic("hero", alts["hero"]), ""]
     if badges:
@@ -37,5 +37,8 @@ def render(profile, alts, badges):
         out.append('<p align="center">')
         out += [link(p["url"], pic(f"project-{p['id']}", alts[f"project-{p['id']}"], width)) for p in projects]
         out += ["</p>", ""]
+    if contrib_href:
+        out += [pic("label-oss", alts["label-oss"]), ""]
+        out += [link(contrib_href, pic("contributions", alts["contributions"])), ""]
     out.append(f'<p align="center"><sub>{escape(profile.get("footer", ""))}</sub></p>')
     return "\n".join(out) + "\n"
