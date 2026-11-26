@@ -396,8 +396,8 @@
  },
  "projects": {
   "capx": {
-   "npm_downloads": null,
-   "npm_version": null,
+   "npm_downloads": 20,
+   "npm_version": "0.1.0",
    "stars": 1
   }
  },

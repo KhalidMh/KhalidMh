@@ -22,7 +22,7 @@
 <picture><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="assets/label-ship-phone-dark.svg"><source media="(max-width: 600px)" srcset="assets/label-ship-phone-light.svg"><source media="(prefers-color-scheme: dark)" srcset="assets/label-ship-dark.svg"><img src="assets/label-ship-light.svg" width="100%" alt="what I ship"></picture>
 
 <p align="center">
-<a href="https://github.com/KhalidMh/capx"><picture><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="assets/project-capx-phone-dark.svg"><source media="(max-width: 600px)" srcset="assets/project-capx-phone-light.svg"><source media="(prefers-color-scheme: dark)" srcset="assets/project-capx-dark.svg"><img src="assets/project-capx-light.svg" width="100%" alt="capx: A Laravel-style CLI installer for SAP CAP projects. in the works; not on npm yet; 1 star."></picture></a>
+<a href="https://github.com/KhalidMh/capx"><picture><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="assets/project-capx-phone-dark.svg"><source media="(max-width: 600px)" srcset="assets/project-capx-phone-light.svg"><source media="(prefers-color-scheme: dark)" srcset="assets/project-capx-dark.svg"><img src="assets/project-capx-light.svg" width="100%" alt="capx: A Laravel-style CLI installer for SAP CAP projects. v0.1.0 on npm; 20 downloads / month; 1 star."></picture></a>
 </p>
 
 <p align="center"><sub>Cards redrawn every night by a GitHub Action from public GitHub and npm data.</sub></p>
