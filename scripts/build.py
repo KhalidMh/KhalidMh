@@ -132,8 +132,13 @@ def main(argv):
     profile = json.loads((ROOT / "profile.json").read_text(encoding="utf-8"))
     if "--demo" in argv:
         out = ROOT / "demo"
-        profile["links"]["linkedin"]["url"] = "https://www.linkedin.com/in/example/"
-        profile["links"]["email"]["address"] = "you@example.com"
+        for kind, link in profile.get("links", {}).items():
+            if kind.startswith("_"):
+                continue
+            if "url" in link:
+                link["url"] = "https://example.com/"
+            if "address" in link:
+                link["address"] = "you@example.com"
         _, alts, badges = draw(profile, demo_state(profile), out / "assets")
         (out / "README.md").write_text(readme.render(profile, alts, badges), encoding="utf-8")
         print(f"demo written to {out}")

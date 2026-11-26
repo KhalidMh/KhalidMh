@@ -1,7 +1,7 @@
 name: refresh profile cards
 
 # Redraws every card from public GitHub and npm data, then commits assets/, README.md and scripts/state.json
-# when a card changed. No secret to set up: the built-in GITHUB_TOKEN only lifts the API rate limit.
+# when any of them changed. No secret to set up: the built-in GITHUB_TOKEN only lifts the API rate limit.
 on:
   schedule:
     - cron: "23 3 * * *"   # every night, 03:23 UTC (04:23 in Casablanca)
@@ -41,10 +41,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets README.md scripts/state.json
-          if git diff --cached --quiet -- assets README.md; then
-            echo "no card changed, nothing committed"
+          if git diff --cached --quiet; then
+            echo "nothing changed, nothing committed"
           else
             git commit -m "chore: refresh profile cards"
+            git pull --rebase
             git push
           fi
       - name: Fail the run when a source failed

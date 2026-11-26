@@ -35,15 +35,15 @@ There is no test suite or linter. To check a change, run `--demo` and open the S
 - Every SVG embeds JetBrains Mono (`scripts/fonts/`), **subset to the characters that SVG actually uses**, as base64 woff2. `SVG.text`/`spans` record the characters, so any text added through raw `s.add(...)` won't be in the font subset.
 - Text layout assumes a monospace font. Width is `0.6 * size * len(text)` (`tw`, `fit`, `wrap`), so switching to a proportional font would break all layout math.
 - Desktop cards are 880px wide and phone cards 440px (`cards.W`). Every card function returns `(svg, alt)` and takes `(…, theme, phone)`.
-- Some strings are hardcoded in `cards.py` instead of read from `profile.json`: the hero window title `~/khalid/profile.cds` and the terminal prompt host `@casa`.
 
 ## profile.json
 
 - Keys starting with `_` are comments. `build.draw` skips `_`-prefixed entries under `links`.
 - A link with an empty `url`/`address` hides its badge. Email badges become `mailto:` links.
 - Each entry in `projects` produces a `project-<id>` card. `npm` and `repo` are optional fetch targets. One project renders at full width, and more than one at 49% each.
+- `window_title` (hero card chrome) and `prompt` (whoami terminal, a space is appended) are optional; `cards.py` has fallbacks.
 - `hero_code` lines are highlighted by the small CDS tokenizer in `cards.highlight`.
 
 ## CI
 
-`.github/workflows/refresh.yml` runs nightly at 03:23 UTC, on manual dispatch, and on any push to `main` that touches `profile.json`, `scripts/**`, or the workflow file. It runs `build.py` with the built-in `GITHUB_TOKEN` and commits `assets/`, `README.md` and `scripts/state.json` as `github-actions[bot]`, but only if `assets/` or `README.md` changed. As a result, **pushing to `main` creates a follow-up bot commit**, so pull before pushing again.
+`.github/workflows/refresh.yml` runs nightly at 03:23 UTC, on manual dispatch, and on any push to `main` that touches `profile.json`, `scripts/**`, or the workflow file. It runs `build.py` with the built-in `GITHUB_TOKEN` and commits `assets/`, `README.md` and `scripts/state.json` as `github-actions[bot]`, whenever any of them changed (it `git pull --rebase`s first, so a push of yours mid-run doesn't fail it). As a result, **pushing to `main` creates a follow-up bot commit**, so pull before pushing again.

@@ -6,6 +6,8 @@
   "greeting": "// hello, I'm",
   "tagline": "Node.js developer building on SAP CAP & BTP",
   "location": "Casablanca, Morocco",
+  "window_title": "~/khalid/profile.cds",
+  "prompt": "khalid@casa:~$",
 
   "links": {
     "_note": "Leave a url empty to hide its badge.",

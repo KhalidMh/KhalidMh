@@ -63,7 +63,7 @@ def hero(p, theme, phone):
     if phone:
         top_code = 212
         s = SVG(440, top_code + len(code) * 19 + 26 + 22, theme, "")
-        frame(s, "~/khalid/profile.cds")
+        frame(s, p.get("window_title", "~/profile.cds"))
         s.text(22, 84, p["greeting"], 13, 400, "muted")
         s.text(20, 134, p["name"], 52, 800, "text")
         s.text(22, 166, fit(p["tagline"], 13, 400), 13, 700, "text")
@@ -74,7 +74,7 @@ def hero(p, theme, phone):
             s.spans(36, top_code + 30 + i * 19, highlight(line), 12)
     else:
         s = SVG(880, 284, theme, "")
-        frame(s, "~/khalid/profile.cds")
+        frame(s, p.get("window_title", "~/profile.cds"))
         s.text(46, 116, p["greeting"], 15, 400, "muted")
         s.text(42, 182, p["name"], 64, 800, "text")
         s.rect(46, 196, 56, 4, "teal", rx=2)
@@ -114,7 +114,7 @@ def badge(kind, label, theme):
 def stats(d, theme, phone):
     tiles = [
         (f"{d['last_year']:,}", "contributions", "in the last 12 months", "teal"),
-        (f"{d['current']['days']:,}", "day streak" if d["current"]["days"] == 1 else "days streak",
+        (f"{d['current']['days']:,}", "day streak",
          f"since {nice_date(d['current']['start'])}" if d["current"]["start"] else "next one starts today", "amber"),
         (f"{d['longest']['days']:,}", "longest streak",
          f"{nice_date(d['longest']['start'])} – {nice_date(d['longest']['end'], True)}" if d["longest"]["start"] else "not started yet",
@@ -249,13 +249,13 @@ def line30(d, theme, phone):
 def whoami(p, theme, phone):
     width = W(phone)
     size, lh, pad = (12, 21, 20) if phone else (14, 25, 30)
-    prompt = f"{p['name'].lower()}@casa:~$ "
+    prompt = p.get("prompt", f"{p['name'].lower()}:~$") + " "
     lines = []
     for entry in p["whoami"]:
         lines.append(("cmd", entry["cmd"]))
         for out in entry["out"]:
-            for i, piece in enumerate(wrap(out, size, width - 2 * pad - tw("  ", size))):
-                lines.append(("out", ("  " if i == 0 else "  ") + piece))
+            for piece in wrap(out, size, width - 2 * pad - tw("  ", size)):
+                lines.append(("out", "  " + piece))
     lines.append(("cursor", ""))
     s = SVG(width, 44 + 34 + (len(lines) - 1) * lh + 26, theme, "")
     frame(s, "bash")
