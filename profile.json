@@ -44,7 +44,7 @@
       "chips": ["Node.js", "SAP CAP", "CLI", "MTA"],
       "url": "https://github.com/KhalidMh/capx",
       "repo": "KhalidMh/capx",
-      "npm": "capx",
+      "npm": "@khalidmh/capx",
       "status_unpublished": "in the works"
     }
   ],
