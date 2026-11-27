@@ -5,7 +5,7 @@
 <a href="mailto:khalid.marhoum97@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/badge-email-dark.svg"><img src="assets/badge-email-light.svg" height="44" alt="Email"></picture></a>
 </p>
 
-<a href="https://github.com/KhalidMh?tab=repositories"><picture><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="assets/stats-phone-dark.svg"><source media="(max-width: 600px)" srcset="assets/stats-phone-light.svg"><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg"><img src="assets/stats-light.svg" width="100%" alt="On GitHub: 23 contributions in the last 12 months, 2-day current streak, longest streak 2 days, 81 contributions since 2021, 9 public repos, 2 stars earned."></picture></a>
+<a href="https://github.com/KhalidMh?tab=repositories"><picture><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="assets/stats-phone-dark.svg"><source media="(max-width: 600px)" srcset="assets/stats-phone-light.svg"><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg"><img src="assets/stats-light.svg" width="100%" alt="On GitHub: 23 contributions in the last 12 months, 3-day current streak, longest streak 3 days, 81 contributions since 2021, 9 public repos, 2 stars earned."></picture></a>
 
 <picture><source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="assets/graph-6m-phone-dark.svg"><source media="(max-width: 600px)" srcset="assets/graph-6m-phone-light.svg"><source media="(prefers-color-scheme: dark)" srcset="assets/graph-6m-dark.svg"><img src="assets/graph-6m-light.svg" width="100%" alt="10 contributions in the last 6 months"></picture>
 

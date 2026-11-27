@@ -4,21 +4,21 @@
    "description": "noise cancellation desktop app",
    "language": "Rust",
    "merged_prs": 0,
-   "stars": 8
+   "stars": 9
   },
   "webosbrew/youtube-webos": {
    "description": "YouTube app for webOS without ads",
    "language": "JavaScript",
    "merged_prs": 0,
-   "stars": 1612
+   "stars": 1613
   }
  },
  "fetched": {
-  "calendar": "2026-11-26",
-  "contrib:OpenKrisp/OpenKrisp": "2026-11-26",
-  "contrib:webosbrew/youtube-webos": "2026-11-26",
-  "project:capx": "2026-11-26",
-  "user": "2026-11-26"
+  "calendar": "2026-11-27",
+  "contrib:OpenKrisp/OpenKrisp": "2026-11-27",
+  "contrib:webosbrew/youtube-webos": "2026-11-27",
+  "project:capx": "2026-11-27",
+  "user": "2026-11-27"
  },
  "last_year": {
   "days": {
@@ -381,7 +381,7 @@
    "2026-11-14": 0,
    "2026-11-15": 0,
    "2026-11-16": 0,
-   "2026-11-17": 1,
+   "2026-11-17": 0,
    "2026-11-18": 0,
    "2026-11-19": 0,
    "2026-11-20": 0,
@@ -390,7 +390,8 @@
    "2026-11-23": 0,
    "2026-11-24": 0,
    "2026-11-25": 2,
-   "2026-11-26": 2
+   "2026-11-26": 2,
+   "2026-11-27": 1
   },
   "total": 23
  },
@@ -456,9 +457,9 @@
     "2026-09-03": 1,
     "2026-10-09": 1,
     "2026-10-12": 1,
-    "2026-11-17": 1,
     "2026-11-25": 2,
-    "2026-11-26": 2
+    "2026-11-26": 2,
+    "2026-11-27": 1
    },
    "total": 23
   }
