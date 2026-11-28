@@ -10,15 +10,15 @@
    "description": "YouTube app for webOS without ads",
    "language": "JavaScript",
    "merged_prs": 0,
-   "stars": 1613
+   "stars": 1615
   }
  },
  "fetched": {
-  "calendar": "2026-11-27",
-  "contrib:OpenKrisp/OpenKrisp": "2026-11-27",
-  "contrib:webosbrew/youtube-webos": "2026-11-27",
-  "project:capx": "2026-11-27",
-  "user": "2026-11-27"
+  "calendar": "2026-11-28",
+  "contrib:OpenKrisp/OpenKrisp": "2026-11-28",
+  "contrib:webosbrew/youtube-webos": "2026-11-28",
+  "project:capx": "2026-11-28",
+  "user": "2026-11-28"
  },
  "last_year": {
   "days": {
@@ -391,7 +391,8 @@
    "2026-11-24": 0,
    "2026-11-25": 2,
    "2026-11-26": 2,
-   "2026-11-27": 1
+   "2026-11-27": 1,
+   "2026-11-28": 0
   },
   "total": 23
  },
